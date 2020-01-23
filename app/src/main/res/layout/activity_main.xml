@@ -20,21 +20,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.09" />
+        app:layout_constraintGuide_percent="0.087893866" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04109589" />
+        app:layout_constraintGuide_percent="0.04379562" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="0.96107054" />
 
     <TextView
         android:id="@+id/textViewSelectLens"

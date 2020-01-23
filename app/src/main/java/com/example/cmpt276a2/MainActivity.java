@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         populateLensList();
         populateListView();
-//        registerClickCallback();
+        registerClickCallback();
+
+//        setupAddLensButton();
     }
 
     private void populateLensList() {
@@ -53,17 +58,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void registerClickCallback() {
-//        ListView list = findViewById(R.id.listViewMain);
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void registerClickCallback() {
+        ListView list = findViewById(R.id.listViewMain);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                String message = "You clicked # " + position +
+                        ", which is string: " +
+                        textView.getText().toString();
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+
+                // Launch the second activity
+                Intent intent = SecondActivity.makeIntent(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+//    private void setupAddLensButton() {
+//        Button btn = (Button) findViewById(R.id.buttonSave);
+//        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                TextView textView = (TextView) view;
-//                String message = "You clicked # " + position +
-//                        ", which is string: " +
-//                        textView.getText().toString();
-//                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+//            public void onClick(View v) {
+//                finish();
 //            }
 //        });
+//    }
 
 }
