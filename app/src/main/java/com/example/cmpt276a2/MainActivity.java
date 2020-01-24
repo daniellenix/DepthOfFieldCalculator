@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         populateLensList();
         populateListView();
         floatingActionButton();
+        clickLens();
 
     }
 
@@ -69,6 +70,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+    }
+
+    private void clickLens() {
+
+        ListView list = findViewById(R.id.listViewMain);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                String message = "You clicked # " + position +
+                        ", which is string: " +
+                        textView.getText().toString();
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+
+                // Launch the second activity
+                Intent intent = ThirdActivity.makeIntent(MainActivity.this);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -82,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 populateListView();
             }
-//            if(resultCode == Activity.RESULT_CANCELED) {
-//
-//            }
         }
     }
 }
