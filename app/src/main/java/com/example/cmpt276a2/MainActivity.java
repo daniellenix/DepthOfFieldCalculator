@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
     }
 
-
     private void floatingActionButton() {
         FloatingActionButton myFab = findViewById(R.id.floatingActionButtonPlus);
         myFab.setOnClickListener(new View.OnClickListener() {
@@ -84,14 +83,13 @@ public class MainActivity extends AppCompatActivity {
                         textView.getText().toString();
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
 
-                // Launch the second activity
-                Intent intent = ThirdActivity.makeIntent(MainActivity.this);
+                // Launch the third activity
+                Intent intent = ThirdActivity.makeIntent(MainActivity.this, position);
                 startActivity(intent);
             }
         });
 
     }
-
 
     // handles returned data
     @Override
