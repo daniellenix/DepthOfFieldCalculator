@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clickLens() {
-
         ListView list = findViewById(R.id.listViewMain);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

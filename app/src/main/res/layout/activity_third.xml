@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Photo details with "
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -45,10 +46,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewInfo">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cocInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="hint"
             android:text="0.029"
+            android:inputType="numberDecimal"
             tools:text="0.029" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +69,8 @@
             android:id="@+id/distanceInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ex: 1.5 for 1.5m" />
+            android:hint="ex: 1.5 for 1.5m"
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -83,14 +87,16 @@
             android:id="@+id/apertureInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:hint="ex: 2.8 for F2.8" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
         android:text="Circle of Confusion [m]"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
@@ -99,66 +105,74 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:text="Distance to subject [m]"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="39dp"
+        android:layout_height="wrap_content"
         android:text="Selected aperture"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
 
     <TextView
         android:id="@+id/textViewNearFocalDistance"
-        android:layout_width="141dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Near Focal Distance"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewFarFocalDistance"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
     <TextView
         android:id="@+id/textViewFarFocalDistance"
-        android:layout_width="142dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         android:text="Far Focal Distance"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewNearFocalDistance"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
     <TextView
         android:id="@+id/textViewDepthOfField"
-        android:layout_width="132dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Depth Of Field"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewHyperfocalDistance"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewFarFocalDistance"
         app:layout_constraintTop_toBottomOf="@+id/textViewFarFocalDistance"
         app:layout_constraintVertical_bias="0.435" />
 
     <TextView
         android:id="@+id/textViewHyperfocalDistance"
-        android:layout_width="133dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="192dp"
         android:text="Hyperfocal Distance"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="@+id/textViewDepthOfField"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
     <Button

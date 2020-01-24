@@ -5,7 +5,7 @@ package com.example.cmpt276a2.model;
  */
 public class DepthCalculator {
 
-    private static final double COC = 0.029;      // COC = "circle of confusion".
+//    private static final double COC = 0.029;      // COC = "circle of confusion".
     static double inf = Double.POSITIVE_INFINITY; // value produced when distance is bigger than the hyper focal point.
 
     /**
@@ -13,8 +13,8 @@ public class DepthCalculator {
      * @param focalLength of lens.
      * @param aperture of lens.
      */
-    public double hyperFocalDistance(int focalLength, double aperture) {
-        double answer = (double)focalLength * (double)focalLength / (aperture * COC);
+    public double hyperFocalDistance(int focalLength, double aperture, double coc) {
+        double answer = (double)focalLength * (double)focalLength / (aperture * coc);
         return answer / 1000;
     }
 

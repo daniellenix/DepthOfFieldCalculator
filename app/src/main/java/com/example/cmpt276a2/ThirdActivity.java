@@ -56,17 +56,23 @@ public class ThirdActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editText = findViewById(R.id.cocInput);
+                double cocInput = Double.parseDouble(editText.getText().toString());
 
-                EditText editText = findViewById(R.id.distanceInput);
+                editText = findViewById(R.id.distanceInput);
                 double userDistanceInput = Double.parseDouble(editText.getText().toString());
 
                 editText = findViewById(R.id.apertureInput);
                 double userApertureInput = Double.parseDouble(editText.getText().toString());
 
+                if(userDistanceInput < 0 || userApertureInput < 0 || cocInput < 0) {
+                    editText.setError("Must be non-negative decimal value");
+                }
+
                 TextView textView;
 
                 // Error handling
-                if(userApertureInput < maxAperture) {
+                while(userApertureInput < maxAperture) {
 
                     textView = findViewById(R.id.textViewHyperfocalDistance);
                     textView.append(" " + "Invalid Aperture");
@@ -79,10 +85,19 @@ public class ThirdActivity extends AppCompatActivity {
 
                     textView = findViewById(R.id.textViewDepthOfField);
                     textView.append(" " + "Invalid Aperture");
+
+                    editText = findViewById(R.id.cocInput);
+                    cocInput = Double.parseDouble(editText.getText().toString());
+
+                    editText = findViewById(R.id.distanceInput);
+                    userDistanceInput = Double.parseDouble(editText.getText().toString());
+
+                    editText = findViewById(R.id.apertureInput);
+                    userApertureInput = Double.parseDouble(editText.getText().toString());
                 }
 
                 // calculations
-                double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput)));
+                double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
                 double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
                 double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
                 double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
