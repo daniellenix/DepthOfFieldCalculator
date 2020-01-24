@@ -4,6 +4,7 @@ package com.example.cmpt276a2.model;
  * A class to hold lens information.
  */
 public class Lens {
+
     private String make;
     private double maxAperture;
     private int focalLength;
@@ -12,6 +13,10 @@ public class Lens {
         this.make = make;
         this.maxAperture = maxAperture;
         this.focalLength = focalLength;
+    }
+
+    public String getMake() {
+        return make;
     }
 
     public double getMaxAperture() {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.cmpt276a2.model.Lens;
 import com.example.cmpt276a2.model.LensManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         populateLensList();
         populateListView();
-        registerClickCallback();
+        floatingActionButton();
 
-//        setupAddLensButton();
     }
 
     private void populateLensList() {
@@ -58,33 +60,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void registerClickCallback() {
-        ListView list = findViewById(R.id.listViewMain);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
-                String message = "You clicked # " + position +
-                        ", which is string: " +
-                        textView.getText().toString();
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-
+    private void floatingActionButton() {
+        FloatingActionButton myFab = findViewById(R.id.floatingActionButtonPlus);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 // Launch the second activity
                 Intent intent = SecondActivity.makeIntent(MainActivity.this);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
     }
 
-//    private void setupAddLensButton() {
-//        Button btn = (Button) findViewById(R.id.buttonSave);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-//    }
 
+    // handles returned data
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                populateListView();
+            }
+//            if(resultCode == Activity.RESULT_CANCELED) {
+//
+//            }
+        }
+    }
 }
