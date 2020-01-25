@@ -21,6 +21,7 @@
         android:layout_width="378dp"
         android:layout_height="52dp"
         android:hint="@string/ex_canon"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
@@ -37,7 +38,8 @@
             android:id="@+id/focalLengthInput"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:hint="@string/ex_200_for_200mm" />
+            android:hint="@string/ex_200_for_200mm"
+            android:inputType="numberSigned"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +54,8 @@
             android:id="@+id/apertureInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ex_2_8_for_f2_8" />
+            android:hint="@string/ex_2_8_for_f2_8"
+            android:inputType="numberDecimal"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -87,8 +90,8 @@
 
     <TextView
         android:id="@+id/textViewFocalLength"
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
+        android:layout_width="261dp"
+        android:layout_height="36dp"
         android:layout_marginBottom="57dp"
         android:text="@string/focal_length_mm"
         android:textSize="22sp"

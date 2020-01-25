@@ -66,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textViewNoLensMessage);
         list.setEmptyView(textView);
 
-
+//        adapter.notifyDataSetChanged();
     }
+
 
     private void floatingActionButton() {
         FloatingActionButton myFab = findViewById(R.id.floatingActionButtonPlus);
@@ -93,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
                 // Launch the third activity
                 Intent intent = ThirdActivity.makeIntent(MainActivity.this, position);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
-
     }
 
     // handles returned data

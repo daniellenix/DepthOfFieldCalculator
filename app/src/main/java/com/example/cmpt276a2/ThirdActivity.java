@@ -10,9 +10,12 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cmpt276a2.model.DepthCalculator;
 import com.example.cmpt276a2.model.Lens;
@@ -23,7 +26,7 @@ import java.text.DecimalFormat;
 public class ThirdActivity extends AppCompatActivity {
 
     private static final String EXTRA_LENS = "com.example.cmpt276a2.ThirdActivity - lensChosen";
-    private LensManager manager = LensManager.getInstance();
+    private LensManager manager;
     DepthCalculator depthCalculator = new DepthCalculator();
 
     private int lensIdx;
@@ -39,9 +42,12 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
+        manager = LensManager.getInstance();
+
         extractDataFromIntent();
         setPhotoDetails();
         autoRecalculate();
+        deleteLens();
     }
 
     private void setPhotoDetails() {
@@ -93,7 +99,6 @@ public class ThirdActivity extends AppCompatActivity {
                     } else if(userApertureInput < 1.4) {
                         apertureText.setError("Must be larger than or equal to 1.4");
                     } else {
-
                         double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
                         double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
                         double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
@@ -130,5 +135,19 @@ public class ThirdActivity extends AppCompatActivity {
     private String formatM(double distanceInM) {
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(distanceInM);
+    }
+
+    private void deleteLens() {
+        Button btn = findViewById(R.id.buttonDelete);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.remove(manager.getLenses().get(lensIdx));
+
+                Intent returnIntent = getIntent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
+        });
     }
 }
