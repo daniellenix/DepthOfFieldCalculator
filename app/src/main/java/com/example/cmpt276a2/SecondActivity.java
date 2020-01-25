@@ -49,21 +49,28 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                EditText editText = findViewById(R.id.makeInput);
-                String userMakeInput = editText.getText().toString();
+                EditText makeText = findViewById(R.id.makeInput);
+                String userMakeInput = makeText.getText().toString();
 
-                editText = findViewById(R.id.focalLengthInput);
-                int userFocalLengthInput = Integer.parseInt(editText.getText().toString());
+                EditText focalLengthText = findViewById(R.id.focalLengthInput);
+                int userFocalLengthInput = Integer.parseInt(focalLengthText.getText().toString());
 
-                editText = findViewById(R.id.apertureInput);
-                double userApertureInput = Double.parseDouble(editText.getText().toString());
+                EditText apertureText = findViewById(R.id.apertureInput);
+                double userApertureInput = Double.parseDouble(apertureText.getText().toString());
 
-                manager.add(new Lens(userMakeInput, userApertureInput, userFocalLengthInput));
+                if(userMakeInput.length() == 0) {
+                    makeText.setError("Must be longer than 0");
+                } else if(userFocalLengthInput < 0) {
+                    focalLengthText.setError("Must be larger than 0");
+                } else if(userApertureInput < 1.4) {
+                    apertureText.setError("Must be larger than or equal to 1.4");
+                } else {
+                    manager.add(new Lens(userMakeInput, userApertureInput, userFocalLengthInput));
 
-                Intent returnIntent = getIntent();
-                setResult(Activity.RESULT_OK, returnIntent);
-                finish();
-
+                    Intent returnIntent = getIntent();
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }
             }
         });
     }

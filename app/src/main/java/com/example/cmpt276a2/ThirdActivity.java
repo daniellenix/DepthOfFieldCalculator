@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,13 +39,12 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
+        extractDataFromIntent();
         setPhotoDetails();
         setCalculateActivityButton();
-        extractDataFromIntent();
     }
 
     private void setPhotoDetails() {
-
         TextView textView = findViewById(R.id.textViewInfo);
         textView.append(manager.getLenses().get(lensIdx).toString());
     }
@@ -52,74 +54,77 @@ public class ThirdActivity extends AppCompatActivity {
         final int focalLength = manager.getLenses().get(lensIdx).getFocalLength();
         final double maxAperture = manager.getLenses().get(lensIdx).getMaxAperture();
 
-        Button btn = findViewById(R.id.buttonCalculate);
-        btn.setOnClickListener(new View.OnClickListener() {
+        final EditText cocText = findViewById(R.id.cocInput);
+        final EditText distanceText = findViewById(R.id.distanceInput);
+        final EditText apertureText = findViewById(R.id.apertureInput);
+
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                EditText editText = findViewById(R.id.cocInput);
-                double cocInput = Double.parseDouble(editText.getText().toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                editText = findViewById(R.id.distanceInput);
-                double userDistanceInput = Double.parseDouble(editText.getText().toString());
+            }
 
-                editText = findViewById(R.id.apertureInput);
-                double userApertureInput = Double.parseDouble(editText.getText().toString());
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                // FIX THIS
-                if(userDistanceInput < 0 || userApertureInput < 0) {
-                    editText.setError(null);
-                }
+            }
 
-                TextView textView;
+            @Override
+            public void afterTextChanged(Editable s) {
 
-                // Error handling
-                if(userApertureInput > maxAperture) {
+                String cocInputString = cocText.getText().toString();
+                String userDistanceInputString = distanceText.getText().toString();
+                String userApertureInputString = apertureText.getText().toString();
 
-                    textView = findViewById(R.id.textViewHyperfocalDistance);
-                    textView.append(" " + "Invalid Aperture");
-
-                    textView = findViewById(R.id.textViewNearFocalDistance);
-                    textView.append(" " + "Invalid Aperture");
-
-                    textView = findViewById(R.id.textViewFarFocalDistance);
-                    textView.append(" " + "Invalid Aperture");
-
-                    textView = findViewById(R.id.textViewDepthOfField);
-                    textView.append(" " + "Invalid Aperture");
-
+                if(TextUtils.isEmpty(cocInputString) || TextUtils.isEmpty(userDistanceInputString) || TextUtils.isEmpty(userApertureInputString)) {
+                    return;
                 } else {
-                    // calculations
-                    double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
-                    double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                    double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                    double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
+                    double cocInput = Double.parseDouble(cocText.getText().toString());
+                    double userDistanceInput = Double.parseDouble(distanceText.getText().toString());
+                    double userApertureInput = Double.parseDouble(apertureText.getText().toString());
 
-                    textView = findViewById(R.id.textViewHyperfocalDistance);
-                    textView.append(" : " + hyperFocalDistance);
+                    if(cocInput < 0) {
+                        cocText.setError("Must be larger than 0");
+                    } else if(userDistanceInput < 0) {
+                        distanceText.setError("Must be larger than 0");
+                    } else if(userApertureInput < 1.4) {
+                        apertureText.setError("Must be larger than or equal to 1.4");
+                    } else if(userApertureInput < maxAperture) {
+                        apertureText.setError("Invalid aperture");
+                    } else {
 
-                    textView = findViewById(R.id.textViewNearFocalDistance);
-                    textView.append(" : " + nearFocalPoint);
+                        double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
+                        double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
+                        double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
+                        double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
 
-                    textView = findViewById(R.id.textViewFarFocalDistance);
-                    textView.append(" : " + farFocalPoint);
+                        TextView hyperFocalTextView = findViewById(R.id.textViewHyperfocalDistance);
+                        hyperFocalTextView.append(" : " + hyperFocalDistance);
 
-                    textView = findViewById(R.id.textViewDepthOfField);
-                    textView.append(" : " + depthOfField);
+                        TextView nearFocalTextView = findViewById(R.id.textViewNearFocalDistance);
+                        nearFocalTextView.append(" : " + nearFocalPoint);
 
-                    Intent returnIntent = getIntent();
-                    setResult(Activity.RESULT_OK, returnIntent);
+                        TextView farFocalTextView= findViewById(R.id.textViewFarFocalDistance);
+                        farFocalTextView.append(" : " + farFocalPoint);
+
+                        TextView depthOfFieldTextView = findViewById(R.id.textViewDepthOfField);
+                        depthOfFieldTextView.append(" : " + depthOfField);
+
+                        Intent returnIntent = getIntent();
+                        setResult(Activity.RESULT_OK, returnIntent);
+                    }
                 }
             }
-        });
+        };
+
+        cocText.addTextChangedListener(textWatcher);
+        distanceText.addTextChangedListener(textWatcher);
+        apertureText.addTextChangedListener(textWatcher);
     }
 
     private void extractDataFromIntent() {
         Intent intent = getIntent();
-
-        String make = intent.getStringExtra(EXTRA_LENS);
-        int focalLength = intent.getIntExtra(EXTRA_LENS, 0);
-        double maxAperture = intent.getDoubleExtra(EXTRA_LENS, 0);
-
+        lensIdx = intent.getIntExtra(EXTRA_LENS, 0);
     }
 
     private String formatM(double distanceInM) {
