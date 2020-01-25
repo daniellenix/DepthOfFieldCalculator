@@ -46,7 +46,7 @@ public class ThirdActivity extends AppCompatActivity {
 
     private void setPhotoDetails() {
         TextView textView = findViewById(R.id.textViewInfo);
-        textView.append(manager.getLenses().get(lensIdx).toString());
+        textView.setText("Photo Details with " + manager.getLenses().get(lensIdx).toString());
     }
 
     private void autoRecalculate() {

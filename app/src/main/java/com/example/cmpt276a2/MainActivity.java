@@ -27,6 +27,8 @@ import com.example.cmpt276a2.model.LensManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         // Configure the list view
         ListView list = findViewById(R.id.listViewMain);
         list.setAdapter(adapter);
+
+        TextView textView = findViewById(R.id.textViewNoLensMessage);
+        list.setEmptyView(textView);
+
+
     }
 
     private void floatingActionButton() {

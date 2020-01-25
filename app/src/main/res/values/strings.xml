@@ -21,4 +21,5 @@
     <string name="depth_of_field">Depth Of Field</string>
     <string name="hyperfocal_distance">Hyperfocal Distance</string>
     <string name="photo_details_with">Photo details with</string>
+    <string name="currently_there_are_no_available_lenses_please_add_a_lens_by_pressing_the_floating_action_button_in_the_bottom_right_corner">Currently there are no available lenses! Please add a lens by pressing the floating action button in the bottom right corner.</string>
 </resources>

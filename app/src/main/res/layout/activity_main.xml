@@ -63,4 +63,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.92" />
 
+    <TextView
+        android:id="@+id/textViewNoLensMessage"
+        android:layout_width="235dp"
+        android:layout_height="195dp"
+        android:gravity="center"
+        android:text="@string/currently_there_are_no_available_lenses_please_add_a_lens_by_pressing_the_floating_action_button_in_the_bottom_right_corner"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
