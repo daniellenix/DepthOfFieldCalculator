@@ -65,14 +65,15 @@ public class ThirdActivity extends AppCompatActivity {
                 editText = findViewById(R.id.apertureInput);
                 double userApertureInput = Double.parseDouble(editText.getText().toString());
 
-                if(userDistanceInput < 0 || userApertureInput < 0 || cocInput < 0) {
-                    editText.setError("Must be non-negative decimal value");
+                // FIX THIS
+                if(userDistanceInput < 0 || userApertureInput < 0) {
+                    editText.setError(null);
                 }
 
                 TextView textView;
 
                 // Error handling
-                while(userApertureInput < maxAperture) {
+                if(userApertureInput > maxAperture) {
 
                     textView = findViewById(R.id.textViewHyperfocalDistance);
                     textView.append(" " + "Invalid Aperture");
@@ -86,37 +87,28 @@ public class ThirdActivity extends AppCompatActivity {
                     textView = findViewById(R.id.textViewDepthOfField);
                     textView.append(" " + "Invalid Aperture");
 
-                    editText = findViewById(R.id.cocInput);
-                    cocInput = Double.parseDouble(editText.getText().toString());
+                } else {
+                    // calculations
+                    double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
+                    double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
+                    double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
+                    double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
 
-                    editText = findViewById(R.id.distanceInput);
-                    userDistanceInput = Double.parseDouble(editText.getText().toString());
+                    textView = findViewById(R.id.textViewHyperfocalDistance);
+                    textView.append(" : " + hyperFocalDistance);
 
-                    editText = findViewById(R.id.apertureInput);
-                    userApertureInput = Double.parseDouble(editText.getText().toString());
+                    textView = findViewById(R.id.textViewNearFocalDistance);
+                    textView.append(" : " + nearFocalPoint);
+
+                    textView = findViewById(R.id.textViewFarFocalDistance);
+                    textView.append(" : " + farFocalPoint);
+
+                    textView = findViewById(R.id.textViewDepthOfField);
+                    textView.append(" : " + depthOfField);
+
+                    Intent returnIntent = getIntent();
+                    setResult(Activity.RESULT_OK, returnIntent);
                 }
-
-                // calculations
-                double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
-                double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
-
-                textView = findViewById(R.id.textViewHyperfocalDistance);
-                textView.append(" : " + hyperFocalDistance);
-
-                textView = findViewById(R.id.textViewNearFocalDistance);
-                textView.append(" : " + nearFocalPoint);
-
-                textView = findViewById(R.id.textViewFarFocalDistance);
-                textView.append(" : " + farFocalPoint);
-
-                textView = findViewById(R.id.textViewDepthOfField);
-                textView.append(" : " + depthOfField);
-
-                Intent returnIntent = getIntent();
-                setResult(Activity.RESULT_OK, returnIntent);
-
             }
         });
     }
