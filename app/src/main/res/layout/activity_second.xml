@@ -20,7 +20,7 @@
         android:id="@+id/makeInput"
         android:layout_width="378dp"
         android:layout_height="52dp"
-        android:hint="ex: Canon"
+        android:hint="@string/ex_canon"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
@@ -28,7 +28,7 @@
         android:id="@+id/focalLength"
         android:layout_width="380dp"
         android:layout_height="57dp"
-        android:hint="ex: 200 for 200mm"
+        android:hint="@string/ex_200_for_200mm"
         app:layout_constraintBottom_toTopOf="@+id/aperture"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/makeInput">
@@ -37,7 +37,7 @@
             android:id="@+id/focalLengthInput"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:hint="ex: 200 for 200mm" />
+            android:hint="@string/ex_200_for_200mm" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +52,7 @@
             android:id="@+id/apertureInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ex: 2.8 for F2.8" />
+            android:hint="@string/ex_2_8_for_f2_8" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -80,8 +80,8 @@
         android:id="@+id/textViewMake"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:text="Make"
-        android:textSize="22dp"
+        android:text="@string/make"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
@@ -90,8 +90,8 @@
         android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="57dp"
-        android:text="Focal Length [mm]"
-        android:textSize="22dp"
+        android:text="@string/focal_length_mm"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/focalLength"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
@@ -100,8 +100,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
-        android:text="Aperture"
-        android:textSize="22dp"
+        android:text="@string/aperture"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/aperture"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
-        android:text="SAVE"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/aperture"
@@ -121,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
-        android:text="CANCEL"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/aperture"
