@@ -41,7 +41,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         extractDataFromIntent();
         setPhotoDetails();
-        setCalculateActivityButton();
+        autoRecalculate();
     }
 
     private void setPhotoDetails() {
@@ -49,7 +49,7 @@ public class ThirdActivity extends AppCompatActivity {
         textView.append(manager.getLenses().get(lensIdx).toString());
     }
 
-    private void setCalculateActivityButton() {
+    private void autoRecalculate() {
 
         final int focalLength = manager.getLenses().get(lensIdx).getFocalLength();
         final double maxAperture = manager.getLenses().get(lensIdx).getMaxAperture();
@@ -88,10 +88,10 @@ public class ThirdActivity extends AppCompatActivity {
                         cocText.setError("Must be larger than 0");
                     } else if(userDistanceInput < 0) {
                         distanceText.setError("Must be larger than 0");
-                    } else if(userApertureInput < 1.4) {
-                        apertureText.setError("Must be larger than or equal to 1.4");
                     } else if(userApertureInput < maxAperture) {
                         apertureText.setError("Invalid aperture");
+                    } else if(userApertureInput < 1.4) {
+                        apertureText.setError("Must be larger than or equal to 1.4");
                     } else {
 
                         double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
@@ -100,16 +100,16 @@ public class ThirdActivity extends AppCompatActivity {
                         double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
 
                         TextView hyperFocalTextView = findViewById(R.id.textViewHyperfocalDistance);
-                        hyperFocalTextView.append(" : " + hyperFocalDistance);
+                        hyperFocalTextView.setText("Hyperfocal Distance: " + hyperFocalDistance);
 
                         TextView nearFocalTextView = findViewById(R.id.textViewNearFocalDistance);
-                        nearFocalTextView.append(" : " + nearFocalPoint);
+                        nearFocalTextView.setText("Near Focal Distance: " + nearFocalPoint);
 
                         TextView farFocalTextView= findViewById(R.id.textViewFarFocalDistance);
-                        farFocalTextView.append(" : " + farFocalPoint);
+                        farFocalTextView.setText("Far Focal Distance: " + farFocalPoint);
 
                         TextView depthOfFieldTextView = findViewById(R.id.textViewDepthOfField);
-                        depthOfFieldTextView.append(" : " + depthOfField);
+                        depthOfFieldTextView.setText("Depth Of Field: " + depthOfField);
 
                         Intent returnIntent = getIntent();
                         setResult(Activity.RESULT_OK, returnIntent);
@@ -117,7 +117,6 @@ public class ThirdActivity extends AppCompatActivity {
                 }
             }
         };
-
         cocText.addTextChangedListener(textWatcher);
         distanceText.addTextChangedListener(textWatcher);
         apertureText.addTextChangedListener(textWatcher);
