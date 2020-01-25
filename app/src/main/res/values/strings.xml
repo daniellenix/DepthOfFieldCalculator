@@ -3,11 +3,22 @@
     <string name="Second_activity_name">Lens Details</string>
     <string name="ex_canon">ex: Canon</string>
     <string name="ex_200_for_200mm">ex: 200 for 200mm</string>
-    <string name="ex_2_8_for_f2_8">ex: 2.8 for F2.8</string>
     <string name="make">Make</string>
     <string name="cancel">CANCEL</string>
     <string name="save">SAVE</string>
     <string name="aperture">Aperture</string>
     <string name="focal_length_mm">Focal Length [mm]</string>
     <string name="select_a_lens_to_use">Select a lens to use:</string>
+    <string name="hint">hint</string>
+    <string name="_0_029">0.029</string>
+    <string name="ex_1_5_for_1_5m">ex: 1.5 for 1.5m</string>
+    <string name="ex_2_8_for_f2_8">ex: 2.8 for F2.8</string>
+    <string name="circle_of_confusion_m">Circle of Confusion [m]</string>
+    <string name="distance_to_subject_m">Distance to subject [m]</string>
+    <string name="selected_aperture">Selected aperture</string>
+    <string name="near_focal_distance">Near Focal Distance</string>
+    <string name="far_focal_distance">Far Focal Distance</string>
+    <string name="depth_of_field">Depth Of Field</string>
+    <string name="hyperfocal_distance">Hyperfocal Distance</string>
+    <string name="photo_details_with">Photo details with</string>
 </resources>

@@ -76,6 +76,7 @@ public class ThirdActivity extends AppCompatActivity {
                 String userDistanceInputString = distanceText.getText().toString();
                 String userApertureInputString = apertureText.getText().toString();
 
+                // Adapted from : https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
                 if(TextUtils.isEmpty(cocInputString) || TextUtils.isEmpty(userDistanceInputString) || TextUtils.isEmpty(userApertureInputString)) {
                     return;
                 } else {
