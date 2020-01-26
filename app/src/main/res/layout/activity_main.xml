@@ -44,7 +44,7 @@
         android:text="@string/select_a_lens_to_use"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+        app:layout_constraintStart_toStartOf="@+id/listViewMain" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonPlus"
@@ -74,5 +74,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewInfoBox"
+        android:layout_width="191dp"
+        android:layout_height="106dp"
+        android:text="Optional Features: \n3.2 Edit and Delete Lens \n3.3 Error Checking Input \n3.4 Auto-recalculate \n3.7 Empty state"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/listViewMain"
+        app:layout_constraintTop_toBottomOf="@+id/listViewMain"
+        app:layout_constraintVertical_bias="0.602" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

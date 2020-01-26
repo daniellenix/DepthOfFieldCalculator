@@ -2,6 +2,7 @@ package com.example.cmpt276a2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +55,7 @@ public class ThirdActivity extends AppCompatActivity {
         lensIdx = intent.getIntExtra(EXTRA_LENS, 0);
     }
 
+    @SuppressLint("SetTextI18n")
     private void setPhotoDetails() {
         TextView textView = findViewById(R.id.textViewInfo);
         textView.setText("Photo Details with " + manager.getLenses().get(lensIdx).toString());
@@ -79,6 +81,7 @@ public class ThirdActivity extends AppCompatActivity {
 
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void afterTextChanged(Editable s) {
 

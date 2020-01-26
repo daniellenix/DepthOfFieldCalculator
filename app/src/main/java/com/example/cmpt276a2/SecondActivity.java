@@ -2,6 +2,7 @@ package com.example.cmpt276a2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -93,6 +94,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void populateEditText() {
         EditText makeText = findViewById(R.id.makeInput);
         makeText.setText("" + manager.getLenses().get(lensIdx).getMake());
