@@ -79,7 +79,7 @@
         android:id="@+id/textViewInfoBox"
         android:layout_width="191dp"
         android:layout_height="106dp"
-        android:text="Optional Features: \n3.2 Edit and Delete Lens \n3.3 Error Checking Input \n3.4 Auto-recalculate \n3.7 Empty state"
+        android:text="@string/optional_features_n3_2_edit_and_delete_lens_n3_3_error_checking_input_n3_4_auto_recalculate_n3_7_empty_state"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/listViewMain"
         app:layout_constraintTop_toBottomOf="@+id/listViewMain"

@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Depth of Field Calculator</string>
     <string name="Second_activity_name">Lens Details</string>
     <string name="ex_canon">ex: Canon</string>
     <string name="ex_200_for_200mm">ex: 200 for 200mm</string>
     <string name="make">Make</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
     <string name="save">SAVE</string>
     <string name="aperture">Aperture</string>
     <string name="focal_length_mm">Focal Length [mm]</string>
@@ -24,4 +24,5 @@
     <string name="currently_there_are_no_available_lenses_please_add_a_lens_by_pressing_the_floating_action_button_in_the_bottom_right_corner">Currently there are no available lenses! Please add a lens by pressing the floating action button in the bottom right corner.</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="optional_features_n3_2_edit_and_delete_lens_n3_3_error_checking_input_n3_4_auto_recalculate_n3_7_empty_state">Optional Features:  3.2 Edit and Delete Lens  3.3 Error Checking Input  3.4 Auto-recalculate  3.7 Empty state</string>
 </resources>
