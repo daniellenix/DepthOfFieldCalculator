@@ -26,7 +26,7 @@ import java.text.DecimalFormat;
 public class ThirdActivity extends AppCompatActivity {
 
     private static final String EXTRA_LENS = "com.example.cmpt276a2.ThirdActivity - lensChosen";
-    private LensManager manager;
+    private LensManager manager = LensManager.getInstance();;
     DepthCalculator depthCalculator = new DepthCalculator();
 
     private int lensIdx;
@@ -42,12 +42,16 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
-        manager = LensManager.getInstance();
-
         extractDataFromIntent();
         setPhotoDetails();
         autoRecalculate();
         deleteLens();
+        editLens();
+    }
+
+    private void extractDataFromIntent() {
+        Intent intent = getIntent();
+        lensIdx = intent.getIntExtra(EXTRA_LENS, 0);
     }
 
     private void setPhotoDetails() {
@@ -127,11 +131,6 @@ public class ThirdActivity extends AppCompatActivity {
         apertureText.addTextChangedListener(textWatcher);
     }
 
-    private void extractDataFromIntent() {
-        Intent intent = getIntent();
-        lensIdx = intent.getIntExtra(EXTRA_LENS, 0);
-    }
-
     private String formatM(double distanceInM) {
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(distanceInM);
@@ -143,6 +142,21 @@ public class ThirdActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 manager.remove(manager.getLenses().get(lensIdx));
+
+                Intent returnIntent = getIntent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+    }
+
+    private void editLens() {
+        Button btn = findViewById(R.id.buttonEdit);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SecondActivity.makeIntent(ThirdActivity.this, lensIdx);
+                startActivityForResult(intent, 1);
 
                 Intent returnIntent = getIntent();
                 setResult(Activity.RESULT_OK, returnIntent);

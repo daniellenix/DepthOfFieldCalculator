@@ -15,10 +15,14 @@ import com.example.cmpt276a2.model.LensManager;
 
 public class SecondActivity extends AppCompatActivity {
 
+    private static final String EXTRA_LENS = "com.example.cmpt276a2.SecondActivity - lensChosen";
     private LensManager manager = LensManager.getInstance();
 
-    public static Intent makeIntent(Context context) {
+    private int lensIdx;
+
+    public static Intent makeIntent(Context context, int lensIdx) {
         Intent intent =  new Intent(context, SecondActivity.class);
+        intent.putExtra(EXTRA_LENS, lensIdx);
         return intent;
     }
 
@@ -27,8 +31,15 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        extractDataFromIntent();
+        populateEditText();
         setupCancelActivityButton();
         setupSaveActivityButton();
+    }
+
+    private void extractDataFromIntent() {
+        Intent intent = getIntent();
+        lensIdx = intent.getIntExtra(EXTRA_LENS, 0);
     }
 
     private void setupCancelActivityButton() {
@@ -67,6 +78,12 @@ public class SecondActivity extends AppCompatActivity {
                 } else {
                     manager.add(new Lens(userMakeInput, userApertureInput, userFocalLengthInput));
 
+                    manager.getLenses().get(lensIdx).setMake(userMakeInput);
+                    manager.getLenses().get(lensIdx).setFocalLength(userFocalLengthInput);
+                    manager.getLenses().get(lensIdx).setMaxAperture(userApertureInput);
+
+                    manager.remove(manager.getLenses().get(lensIdx));
+
                     Intent returnIntent = getIntent();
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
@@ -74,4 +91,17 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void populateEditText() {
+        EditText makeText = findViewById(R.id.makeInput);
+        makeText.setText("" + manager.getLenses().get(lensIdx).getMake());
+
+        EditText focalLengthText = findViewById(R.id.focalLengthInput);
+        focalLengthText.setText("" + manager.getLenses().get(lensIdx).getFocalLength());
+
+        EditText apertureText = findViewById(R.id.apertureInput);
+        apertureText.setText("" + manager.getLenses().get(lensIdx).getMaxAperture());
+    }
+
 }

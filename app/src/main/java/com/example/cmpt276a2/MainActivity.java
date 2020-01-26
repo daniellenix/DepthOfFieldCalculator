@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textViewNoLensMessage);
         list.setEmptyView(textView);
-
-//        adapter.notifyDataSetChanged();
     }
 
 
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Launch the second activity
-                Intent intent = SecondActivity.makeIntent(MainActivity.this);
+                Intent intent = SecondActivity.makeIntent(MainActivity.this, 0);
                 startActivityForResult(intent, 1);
             }
         });
@@ -87,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView textView = (TextView) view;
-                String message = "You clicked # " + position +
-                        ", which is string: " +
-                        textView.getText().toString();
+                String message = "You clicked # " + position + ", which is string: " + textView.getText().toString();
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
 
                 // Launch the third activity
