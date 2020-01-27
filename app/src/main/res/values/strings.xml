@@ -25,4 +25,12 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="optional_features_n3_2_edit_and_delete_lens_n3_3_error_checking_input_n3_4_auto_recalculate_n3_7_empty_state">Optional Features:  3.2 Edit and Delete Lens  3.3 Error Checking Input  3.4 Auto-recalculate  3.7 Empty state</string>
+    <string name="ex_0_029">ex: 0.029</string>
+    <string name="lens_image">Lens Image</string>
+    <string name="grey">Grey</string>
+    <string name="brown">Brown</string>
+    <string name="teal">Teal</string>
+    <string name="green">Green</string>
+    <string name="aqua">Aqua</string>
+    <string name="make_shown_here">Make shown here</string>
 </resources>

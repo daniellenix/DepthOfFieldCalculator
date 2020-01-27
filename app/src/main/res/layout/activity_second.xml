@@ -145,38 +145,38 @@
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aqua" />
+            android:text="@string/aqua" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Green" />
+            android:text="@string/green" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Teal" />
+            android:text="@string/teal" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Brown" />
+            android:text="@string/brown" />
 
         <RadioButton
             android:id="@+id/radioButton6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Grey" />
+            android:text="@string/grey" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textViewLensImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lens Image"
+        android:text="@string/lens_image"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="@+id/guideline5"

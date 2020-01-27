@@ -49,9 +49,9 @@
             android:id="@+id/cocInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint"
             android:inputType="numberDecimal"
             android:text="@string/_0_029"
+            android:hint="@string/ex_0_029"
             tools:text="0.029" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -33,6 +33,9 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main activity adds lenses to screen, launches second activity to add lens and launches third activity to calculate.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private LensManager manager = LensManager.getInstance();
@@ -56,23 +59,12 @@ public class MainActivity extends AppCompatActivity {
         manager.add(new Lens("Nikon", 4, 200, R.drawable.camera4));
     }
 
-//    private void populateListView() {
-//        // Build adapter
-//        ArrayAdapter<Lens> adapter = new ArrayAdapter<>(this, R.layout.lens_list, manager.getLenses());
-//
-//        // Configure the list view
-//        ListView list = findViewById(R.id.listViewMain);
-//        list.setAdapter(adapter);
-//
-//        TextView textView = findViewById(R.id.textViewNoLensMessage);
-//        list.setEmptyView(textView);
-//    }
-
     private void populateListView() {
         ArrayAdapter<Lens> adapter = new MyListAdapter();
         ListView list = findViewById(R.id.listViewMain);
         list.setAdapter(adapter);
 
+//        Adapted from: https://stackoverflow.com/questions/10017088/android-displaying-text-when-listview-is-empty
         TextView textView = findViewById(R.id.textViewNoLensMessage);
         list.setEmptyView(textView);
     }
@@ -107,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             return itemView;
         }
     }
-
 
     private void floatingActionButton() {
         FloatingActionButton myFab = findViewById(R.id.floatingActionButtonPlus);

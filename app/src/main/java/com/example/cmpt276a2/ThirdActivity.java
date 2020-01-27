@@ -24,6 +24,9 @@ import com.example.cmpt276a2.model.LensManager;
 
 import java.text.DecimalFormat;
 
+/**
+ * Third activity extracts data, auto-recalculates, allows deletion and editing of lenses.
+ */
 public class ThirdActivity extends AppCompatActivity {
 
     private static final String EXTRA_LENS = "com.example.cmpt276a2.ThirdActivity - lensChosen";
@@ -90,9 +93,14 @@ public class ThirdActivity extends AppCompatActivity {
                 String userApertureInputString = apertureText.getText().toString();
 
                 // Adapted from : https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
-                if(TextUtils.isEmpty(cocInputString) || TextUtils.isEmpty(userDistanceInputString) || TextUtils.isEmpty(userApertureInputString)) {
-                    return;
+                if(TextUtils.isEmpty(cocInputString)) {
+                    cocText.setError("Must have input");
+                } else if(TextUtils.isEmpty(userDistanceInputString)) {
+                    distanceText.setError("Must have input");
+                } else if(TextUtils.isEmpty(userApertureInputString)) {
+                    apertureText.setError("Must have input");
                 } else {
+
                     double cocInput = Double.parseDouble(cocText.getText().toString());
                     double userDistanceInput = Double.parseDouble(distanceText.getText().toString());
                     double userApertureInput = Double.parseDouble(apertureText.getText().toString());
@@ -112,16 +120,16 @@ public class ThirdActivity extends AppCompatActivity {
                         double depthOfField = depthCalculator.depthOfField(farFocalPoint, nearFocalPoint);
 
                         TextView hyperFocalTextView = findViewById(R.id.textViewHyperfocalDistance);
-                        hyperFocalTextView.setText("Hyperfocal Distance: " + formatM(hyperFocalDistance));
+                        hyperFocalTextView.setText("Hyperfocal Distance: " + formatM(hyperFocalDistance) + "m");
 
                         TextView nearFocalTextView = findViewById(R.id.textViewNearFocalDistance);
-                        nearFocalTextView.setText("Near Focal Distance: " + formatM(nearFocalPoint));
+                        nearFocalTextView.setText("Near Focal Distance: " + formatM(nearFocalPoint)+ "m");
 
                         TextView farFocalTextView= findViewById(R.id.textViewFarFocalDistance);
-                        farFocalTextView.setText("Far Focal Distance: " + formatM(farFocalPoint));
+                        farFocalTextView.setText("Far Focal Distance: " + formatM(farFocalPoint)+ "m");
 
                         TextView depthOfFieldTextView = findViewById(R.id.textViewDepthOfField);
-                        depthOfFieldTextView.setText("Depth Of Field: " + formatM(depthOfField));
+                        depthOfFieldTextView.setText("Depth Of Field: " + formatM(depthOfField)+ "m");
 
                         Intent returnIntent = getIntent();
                         setResult(Activity.RESULT_OK, returnIntent);
@@ -153,6 +161,7 @@ public class ThirdActivity extends AppCompatActivity {
         });
     }
 
+//    Adapted from : https://developer.android.com/training/contacts-provider/modify-data
     private void editLens() {
         Button btn = findViewById(R.id.buttonEdit);
         btn.setOnClickListener(new View.OnClickListener() {
