@@ -106,22 +106,22 @@ public class ThirdActivity extends AppCompatActivity {
                     } else if(userApertureInput < 1.4) {
                         apertureText.setError("Must be larger than or equal to 1.4");
                     } else {
-                        double hyperFocalDistance = Double.parseDouble(formatM(depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput)));
-                        double nearFocalPoint = Double.parseDouble(formatM(depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                        double farFocalPoint = Double.parseDouble(formatM(depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength)));
-                        double depthOfField = Double.parseDouble(formatM(depthCalculator.depthOfField(farFocalPoint, nearFocalPoint)));
+                        double hyperFocalDistance = depthCalculator.hyperFocalDistance(focalLength, userApertureInput, cocInput);
+                        double nearFocalPoint = depthCalculator.nearFocalPoint(hyperFocalDistance, userDistanceInput, focalLength);
+                        double farFocalPoint = depthCalculator.farFocalPoint(hyperFocalDistance, userDistanceInput, focalLength);
+                        double depthOfField = depthCalculator.depthOfField(farFocalPoint, nearFocalPoint);
 
                         TextView hyperFocalTextView = findViewById(R.id.textViewHyperfocalDistance);
-                        hyperFocalTextView.setText("Hyperfocal Distance: " + hyperFocalDistance);
+                        hyperFocalTextView.setText("Hyperfocal Distance: " + formatM(hyperFocalDistance));
 
                         TextView nearFocalTextView = findViewById(R.id.textViewNearFocalDistance);
-                        nearFocalTextView.setText("Near Focal Distance: " + nearFocalPoint);
+                        nearFocalTextView.setText("Near Focal Distance: " + formatM(nearFocalPoint));
 
                         TextView farFocalTextView= findViewById(R.id.textViewFarFocalDistance);
-                        farFocalTextView.setText("Far Focal Distance: " + farFocalPoint);
+                        farFocalTextView.setText("Far Focal Distance: " + formatM(farFocalPoint));
 
                         TextView depthOfFieldTextView = findViewById(R.id.textViewDepthOfField);
-                        depthOfFieldTextView.setText("Depth Of Field: " + depthOfField);
+                        depthOfFieldTextView.setText("Depth Of Field: " + formatM(depthOfField));
 
                         Intent returnIntent = getIntent();
                         setResult(Activity.RESULT_OK, returnIntent);
