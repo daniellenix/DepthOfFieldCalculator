@@ -77,12 +77,15 @@
 
     <TextView
         android:id="@+id/textViewInfoBox"
-        android:layout_width="191dp"
-        android:layout_height="106dp"
-        android:text="@string/optional_features_n3_2_edit_and_delete_lens_n3_3_error_checking_input_n3_4_auto_recalculate_n3_7_empty_state"
+        android:layout_width="188dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="8dp"
+        android:text="Optional features: \n3.2. edit and delete lens \n3.3. error checking input \n3.4. auto-recalculate \n3.6. lens icons \n3.7. empty state"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/listViewMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/listViewMain"
-        app:layout_constraintVertical_bias="0.602" />
+        app:layout_constraintVertical_bias="0.822" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

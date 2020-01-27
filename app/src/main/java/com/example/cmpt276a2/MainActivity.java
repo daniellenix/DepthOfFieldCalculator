@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -49,22 +50,62 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateLensList() {
         // Create list of items
-        manager.add(new Lens("Canon", 1.8, 50));
-        manager.add(new Lens("Tamron", 2.8, 90));
-        manager.add(new Lens("Sigma", 2.8, 200));
-        manager.add(new Lens("Nikon", 4, 200));
+        manager.add(new Lens("Canon", 1.8, 50, R.drawable.camera1));
+        manager.add(new Lens("Tamron", 2.8, 90, R.drawable.camera2));
+        manager.add(new Lens("Sigma", 2.8, 200, R.drawable.camera3));
+        manager.add(new Lens("Nikon", 4, 200, R.drawable.camera4));
     }
 
-    private void populateListView() {
-        // Build adapter
-        ArrayAdapter<Lens> adapter = new ArrayAdapter<>(this, R.layout.lens_list, manager.getLenses());
+//    private void populateListView() {
+//        // Build adapter
+//        ArrayAdapter<Lens> adapter = new ArrayAdapter<>(this, R.layout.lens_list, manager.getLenses());
+//
+//        // Configure the list view
+//        ListView list = findViewById(R.id.listViewMain);
+//        list.setAdapter(adapter);
+//
+//        TextView textView = findViewById(R.id.textViewNoLensMessage);
+//        list.setEmptyView(textView);
+//    }
 
-        // Configure the list view
+    private void populateListView() {
+        ArrayAdapter<Lens> adapter = new MyListAdapter();
         ListView list = findViewById(R.id.listViewMain);
         list.setAdapter(adapter);
 
         TextView textView = findViewById(R.id.textViewNoLensMessage);
         list.setEmptyView(textView);
+    }
+
+    private class MyListAdapter extends ArrayAdapter<Lens> {
+
+        public MyListAdapter() {
+            super(MainActivity.this, R.layout.item_view, manager.getLenses());
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+            // make sure we have a view to work with
+            View itemView = convertView;
+
+            if(itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
+            }
+
+            // find the lens to work with
+            Lens currentLens = manager.getLenses().get(position);
+
+            // fill the view
+            ImageView imageView = itemView.findViewById(R.id.itemIcon);
+            imageView.setImageResource(currentLens.getIconID());
+
+            TextView textView = itemView.findViewById(R.id.item_text);
+            textView.setText(currentLens.toString());
+
+            return itemView;
+        }
     }
 
 
@@ -73,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Launch the second activity
-                Intent intent = SecondActivity.makeIntent(MainActivity.this, 0);
+                Intent intent = SecondActivity.makeIntent(MainActivity.this, -1);
                 startActivityForResult(intent, 1);
             }
         });
@@ -84,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
-                String message = "You clicked # " + position + ", which is string: " + textView.getText().toString();
+                Lens clickedLens = manager.getLenses().get(position); ;
+                String message = "You clicked # " + position + ", which is string: " + clickedLens.toString();
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
 
                 // Launch the third activity
